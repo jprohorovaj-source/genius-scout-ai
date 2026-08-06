@@ -221,6 +221,7 @@ Vision Transformer
 **Юлия Прохорова**
 
 Machine Learning Engineer
+https://drive.google.com/file/d/1zMnQBwkycjNpEDsaB8EN1Wtp2u8F5pc-/view?usp=sharing 
 
 GitHub:
 https://github.com/jprohorovaj-source
