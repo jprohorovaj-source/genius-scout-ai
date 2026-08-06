@@ -1,0 +1,21 @@
+# Python-кэш и скомпилированные бинарники
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Локальные базы данных и векторные хранилища (RAG Data Workspace)
+genius_scout_workspace/
+*.sqlite3
+*.bin
+
+# Временные системные логи и сертификаты Gradio
+.gradio/
+*.log
+*.pem
+
+# Файлы конфигурации среды выполнения IDE
+.ipynb_checkpoints/
+.env
+.vscode/
+.idea/

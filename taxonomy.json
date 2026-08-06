@@ -1,0 +1,67 @@
+{
+  "gemini": {
+    "domain": "large_language_models",
+    "categories": [
+      "cs.CL",
+      "cs.LG",
+      "cs.AI"
+    ],
+    "exact_query": "\"gemini embedding\" OR \"gemini architecture\" OR \"multimodal LLM\"",
+    "keywords": [
+      "embedding",
+      "transformer",
+      "attention",
+      "multimodal",
+      "llm",
+      "context length"
+    ]
+  },
+  "random forest": {
+    "domain": "ensemble_learning",
+    "categories": [
+      "cs.LG",
+      "stat.ML"
+    ],
+    "exact_query": "\"random forest\" OR \"decision forest\" OR \"bagging ensemble\"",
+    "keywords": [
+      "decision tree",
+      "ensemble",
+      "bagging",
+      "bootstrap",
+      "gini impurity",
+      "out-of-bag"
+    ]
+  },
+  "transformer": {
+    "domain": "deep_learning_architectures",
+    "categories": [
+      "cs.CL",
+      "cs.LG",
+      "cs.AI"
+    ],
+    "exact_query": "\"transformer architecture\" OR \"attention mechanism\" OR \"self-attention\"",
+    "keywords": [
+      "attention",
+      "multi-head",
+      "encoder",
+      "decoder",
+      "positional encoding",
+      "swiglu"
+    ]
+  },
+  "cnn": {
+    "domain": "computer_vision",
+    "categories": [
+      "cs.CV"
+    ],
+    "exact_query": "\"convolutional neural network\" OR \"resnet\" OR \"feature extraction\"",
+    "keywords": [
+      "convolution",
+      "pooling",
+      "stride",
+      "resnet",
+      "backbone",
+      "image classification"
+    ]
+  }
+}
