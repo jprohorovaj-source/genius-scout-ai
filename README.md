@@ -1,443 +1,236 @@
+Спасибо. Как тебе описание? 
 #  GeniusScout AI v10.5
-## Autonomous Multi-Agent RAG & Academic Knowledge Compiler
+## Автономная AI-система поиска, семантического анализа и компиляции научных знаний
 
-<p align="center">
-Enterprise-grade autonomous AI research assistant for real-time scientific intelligence extraction
-</p>
+> **GeniusScout AI** — интеллектуальная система, предназначенная для автоматического поиска, анализа и инженерной интерпретации современных научных публикаций из ArXiv. Проект позволяет заменить многочасовой ручной поиск литературы автоматизированным AI-пайплайном, который за несколько минут находит наиболее релевантные исследования, фильтрует их с использованием современных языковых моделей и формирует готовый инженерный отчет.
 
 ---
 
-#  Author / Автор
+#  Цель проекта
 
-**Yuliya Prokhorova (Юлия Прохорова)**
+Современный инженер машинного обучения ежедневно сталкивается с огромным количеством научных публикаций. Самостоятельный поиск актуальных статей, их изучение и сравнение занимают значительное количество времени.
 
- Contact: j.prohorova.j@gmail.com
+**GeniusScout AI** решает эту проблему за счет полностью автоматизированного процесса:
 
-🔗 GitHub Repository:
-
-https://github.com/jprohorovaj-source/genius-scout-ai
-
- Qualification:
-
-Skillbox Certified Machine Learning Junior  
-Certificate № SKB0493892  
-Issued: 15.06.2026
+- поиск научных публикаций;
+- устранение неоднозначности запроса;
+- семантическая фильтрация результатов;
+- построение векторной базы знаний;
+- интеллектуальное ранжирование;
+- генерация инженерного отчета на русском языке.
 
 ---
 
-#  Project Overview
+#  Основные возможности
 
-## English Description
+✅ Автоматический поиск публикаций ArXiv
 
-**GeniusScout AI** is an autonomous **RAG (Retrieval-Augmented Generation) platform** designed for automated scientific knowledge discovery, semantic verification, and structured research analysis.
+✅ Семантическое понимание исследовательского запроса
 
-The system creates a complete AI-powered research pipeline:
+✅ Интеллектуальная фильтрация нерелевантных статей
 
-- intelligent academic query generation;
-- real-time arXiv paper collection;
-- semantic relevance filtering;
-- automatic knowledge extraction;
-- structured Markdown reporting.
+✅ Построение локальной векторной базы знаний (FAISS)
 
-The project is engineered using:
+✅ Многоязычные эмбеддинги высокого качества
 
-- Clean Architecture principles;
-- SOLID design principles;
-- modular AI-agent architecture;
-- deterministic processing pipelines;
-- Docker deployment.
+✅ Генерация инженерных рекомендаций
+
+✅ Интерактивный Web-интерфейс на Gradio
+
+✅ Подробное логирование всех этапов обработки
 
 ---
 
-#  Business Value
+#  Архитектура системы
 
-Modern researchers and ML engineers spend significant time on:
+```text
+                    Пользователь
 
-- searching scientific publications;
-- analyzing hundreds of papers;
-- identifying used datasets and frameworks;
-- comparing approaches;
-- tracking new research directions.
+                          │
 
-GeniusScout AI transforms this workflow into an autonomous intelligence pipeline.
+                          ▼
 
----
+              Context Disambiguator
 
-#  Core Technical Features
+                          │
 
+                          ▼
 
-## 1. Real-Time Scientific Intelligence
+                 Academic Query Builder
 
-The platform directly connects to arXiv sources.
+                          │
 
-Benefits:
+                          ▼
 
-- no dependency on static knowledge cutoff;
-- access to newly published research;
-- continuous academic intelligence updates.
+                    ArXiv Collector
 
----
+                          │
 
-## 2. Semantic Noise Filtering
+                          ▼
 
-Implemented adaptive semantic gate:
+                 Semantic Gate
+          (CrossEncoder Re-Ranking)
 
-~~~text
-gate.py
-~~~
+                          │
 
-Powered by:
+                          ▼
 
-~~~text
-cross-encoder/ms-marco-MiniLM-L-6-v2
-~~~
+           Embedding Generator (E5 Large)
 
-Responsibilities:
+                          │
 
-- semantic relevance scoring;
-- duplicate research elimination;
-- domain ambiguity reduction;
-- mathematical threshold filtering.
+                          ▼
 
----
+               FAISS Vector Database
 
-## 3. Autonomous Knowledge Compiler
+                          │
 
-Module:
+                          ▼
 
-~~~text
-knowledge_compiler.py
-~~~
+              Engineering Report Builder
 
-Automatically extracts:
+                          │
 
-- machine learning frameworks;
-- datasets;
-- evaluation metrics;
-- algorithms;
-- research terminology.
+                          ▼
 
-The system uses statistical extraction methods instead of fragile rule-based parsing.
+                  Gradio Web Interface
+```
 
 ---
 
-## 4. Fault-Tolerant Architecture
+#  Используемые технологии
 
-Implemented:
-
-- fallback routing;
-- isolated components;
-- external API resilience;
-- dependency separation.
-
-Goal:
-
-Reliable execution under unstable external conditions.
-
----
-
-#  System Architecture
-
-~~~text
-
-                USER QUERY
-
-                    |
-                    v
-
-        +--------------------------+
-        | AcademicQueryBuilder     |
-        | arXiv DSL Compiler       |
-        +------------+-------------+
-
-                     |
-
-                     v
-
-        +--------------------------+
-        | arXiv Upstream API       |
-        | Real-time Papers Source  |
-        +------------+-------------+
-
-                     |
-
-                     v
-
-        +--------------------------+
-        | Semantic Gate (ARG)      |
-        | Cross Encoder Filtering  |
-        +------------+-------------+
-
-                     |
-
-                     v
-
-        +--------------------------+
-        | Knowledge Extractor      |
-        | Statistical Compiler     |
-        +------------+-------------+
-
-                     |
-
-                     v
-
-        +--------------------------+
-        | MarkdownRenderer + UI    |
-        | Gradio Presentation      |
-        +--------------------------+
-
-~~~
+| Компонент | Технология |
+|-----------|------------|
+| Язык программирования | Python 3.11 |
+| Интерфейс | Gradio |
+| Поиск публикаций | ArXiv API |
+| Семантическое ранжирование | CrossEncoder (MS MARCO MiniLM) |
+| Векторные представления | intfloat/multilingual-e5-large |
+| Векторная база | FAISS |
+| Логирование | Loguru |
+| Асинхронность | asyncio |
 
 ---
 
-#  Repository Structure
+#  Структура проекта
 
+```text
+GeniusScout AI/
 
-~~~text
-genius-scout-ai/
-
-│
-├── agent_core.py
-│   └── Multi-agent orchestration layer
-│
-├── app.py
-│   └── Gradio web interface
-│
-├── collector.py
-│   └── Academic query builder
-│
-├── config.py
-│   └── Central configuration
-│
-├── gate.py
-│   └── Semantic relevance filtering
-│
-├── knowledge_compiler.py
-│   └── Knowledge extraction engine
-│
-├── vector_store.py
-│   └── FAISS vector database manager
-│
-├── taxonomy.json
-│   └── Domain taxonomy configuration
-│
-├── Dockerfile
-│   └── Production containerization
-│
+├── app.py                 # Web-интерфейс
+├── agent_core.py          # Главный AI-оркестратор
+├── collector.py           # Поиск публикаций ArXiv
+├── gate.py                # Семантический фильтр
+├── vector_store.py        # Работа с эмбеддингами и FAISS
 ├── requirements.txt
-│   └── Python dependencies
-│
-└── .gitignore
-
-~~~
+├── README.md
+└── assets/
+```
 
 ---
 
-#  Technology Stack
+#  Пайплайн обработки запроса
 
+После ввода пользователем темы исследования система автоматически выполняет следующие этапы:
 
-## Artificial Intelligence
-
-- Retrieval-Augmented Generation (RAG)
-- Semantic Search
-- Cross-Encoder Models
-- NLP Processing
-- Knowledge Extraction
-
-
-## Machine Learning
-
-- Sentence Transformers
-- FAISS Vector Search
-- Statistical Feature Engineering
-
-
-## Backend
-
-- Python
-- Modular Architecture
-- Agent-based Design
-
-
-## Deployment
-
-- Docker
-- Gradio
-- Production packaging
+1. Анализирует исследовательский запрос.
+2. Формирует оптимальный поисковый запрос.
+3. Выполняет поиск публикаций в ArXiv.
+4. Собирает найденные статьи.
+5. Выполняет семантическое ранжирование результатов.
+6. Создает векторные представления публикаций.
+7. Индексирует статьи в FAISS.
+8. Формирует инженерный аналитический отчет.
+9. Отображает результат в интерактивном интерфейсе.
 
 ---
 
-#  Quick Start
+#  Пример использования
 
+Пользователь вводит запрос:
 
-## Clone Repository
+```text
+Vision Transformer
+```
 
+В результате система автоматически:
 
-~~~bash
-git clone https://github.com/jprohorovaj-source/genius-scout-ai.git
-
-cd genius-scout-ai
-~~~
-
-
-## Install Dependencies
-
-
-~~~bash
-pip install -r requirements.txt
-~~~
-
-
-## Run Application
-
-
-~~~bash
-python app.py
-~~~
-
-
-Application:
-
-~~~text
-http://127.0.0.1:7860
-~~~
+- находит современные статьи;
+- удаляет нерелевантные публикации;
+- ранжирует исследования по смысловой близости;
+- формирует краткое описание каждой работы;
+- предоставляет ссылки на оригинальные статьи ArXiv;
+- создает рекомендации по внедрению найденных решений.
 
 ---
 
-#  Docker Deployment
+#  Особенности проекта
 
+В отличие от классического поиска по ключевым словам, GeniusScout AI использует современные методы семантического поиска.
 
-Build image:
+Используются:
 
+- трансформерные эмбеддинги;
+- CrossEncoder для оценки релевантности;
+- FAISS для быстрого поиска похожих документов;
+- многоэтапный AI-пайплайн обработки научной информации.
 
-~~~bash
-docker build -t genius-scout-ai:v10.5 .
-~~~
-
-
-Run container:
-
-
-~~~bash
-docker run -d \
--p 7860:7860 \
---name genius-scout-app \
-genius-scout-ai:v10.5
-~~~
+Это позволяет значительно уменьшить количество информационного шума и повысить качество найденных исследований.
 
 ---
 
-# 🇷🇺 Русская версия
+#  План дальнейшего развития
 
+### Реализовано
 
-# Описание проекта
+- ✔ Поиск публикаций ArXiv
+- ✔ Семантическое ранжирование
+- ✔ Векторная база знаний
+- ✔ Генерация инженерных отчетов
+- ✔ Web-интерфейс
+- ✔ Асинхронная архитектура
 
+### Планируется
 
-**GeniusScout AI** — автономная интеллектуальная RAG-платформа для анализа научных исследований.
-
-
-Система автоматически:
-
-
-- формирует академические запросы;
-- получает актуальные публикации arXiv;
-- выполняет семантическую фильтрацию;
-- извлекает знания;
-- формирует структурированные отчёты.
-
-
----
-
-# Инженерная ценность проекта
-
-
-## Работа с актуальными знаниями
-
-Прямая интеграция с arXiv позволяет анализировать новые исследования без ожидания обновления модели.
-
+- ⏳ Полноценная мультиагентная архитектура
+- ⏳ Автоматическое извлечение информации из PDF
+- ⏳ Построение графа цитирований
+- ⏳ Локальная интеграция LLM
+- ⏳ Knowledge Graph
+- ⏳ Docker-развертывание
+- ⏳ REST API
+- ⏳ Развертывание в Hugging Face Spaces
 
 ---
 
-## Семантический фильтр качества
+#  Практическое применение
 
+Проект может использоваться:
 
-Модуль:
-
-~~~text
-gate.py
-~~~
-
-
-использует:
-
-
-~~~text
-cross-encoder/ms-marco-MiniLM-L-6-v2
-~~~
-
-
-для:
-
-- оценки релевантности;
-- удаления информационного шума;
-- повышения качества поиска.
-
+- инженерами машинного обучения;
+- исследователями;
+- студентами магистратуры;
+- аспирантами;
+- преподавателями;
+- командами R&D.
 
 ---
 
-## Компилятор знаний
+#  Автор
 
+**Юлия Прохорова**
 
-Модуль:
+Machine Learning Engineer
 
-~~~text
-knowledge_compiler.py
-~~~
+GitHub:
+https://github.com/jprohorovaj-source
 
-
-извлекает:
-
-
-- библиотеки;
-- датасеты;
-- модели;
-- метрики;
-- алгоритмы.
-
+E-mail:
+j.prohorova.j@gmail.com
 
 ---
 
-# 📈 Project Vision
+#  Концепция проекта
 
-
-GeniusScout AI demonstrates practical implementation of modern AI Engineering:
-
-
-- Autonomous Agents
-- RAG Pipelines
-- Semantic Intelligence
-- Scientific Data Mining
-- Production Deployment
-
-
----
-
-#  Future Development
-
-
-Planned improvements:
-
-
-- multi-agent collaboration;
-- local LLM support;
-- hybrid vector and graph retrieval;
-- automatic research comparison;
-- knowledge graph generation;
-- cloud deployment.
-
-
----
-
-<p align="center">
-Built with Python • AI Engineering • RAG • Machine Learning
-</p>
+> **GeniusScout AI** — это интеллектуальный исследовательский помощник нового поколения, который объединяет поиск научных публикаций, семантический анализ, векторные базы знаний и инженерную интерпретацию результатов в единую автономную систему поддержки принятия технических решений.
