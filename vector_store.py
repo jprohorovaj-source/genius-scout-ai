@@ -1,5 +1,3 @@
-%%writefile vector_store.py
-
 from __future__ import annotations
 
 from pathlib import Path
