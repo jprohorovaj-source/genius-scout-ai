@@ -1,5 +1,3 @@
-%%writefile knowledge_compiler.py
-
 from __future__ import annotations
 
 import re
