@@ -1,6 +1,10 @@
 import streamlit as st
+import asyncio
 import sys
 import os
+
+# Импортируем нашего агента из существующего ядра
+from agent_core import GeniusScoutAgent
 
 # Настройка страницы
 st.set_page_config(
@@ -12,6 +16,17 @@ st.set_page_config(
 st.title("🔬 GeniusScout AI v10.5")
 st.markdown("### Автономная AI-система поиска, семантического анализа и компиляции научных знаний из ArXiv")
 
+# Кэшируем инициализацию агента, чтобы модель и векторная база не загружались заново при каждом клике
+@st.cache_resource
+def get_agent():
+    return GeniusScoutAgent()
+
+try:
+    with st.spinner("Инициализация ядра агента и загрузка компонентов..."):
+        agent = get_agent()
+except Exception as e:
+    st.error(f"Ошибка при инициализации агента: {e}")
+
 # Поле ввода поискового запроса
 query = st.text_input(
     "Введите исследовательский запрос или тему:",
@@ -20,19 +35,16 @@ query = st.text_input(
 
 if st.button("Запустить скаут-анализ", type="primary"):
     if query:
-        with st.spinner("Выполняется поиск в ArXiv, семантическая фильтрация и генерация отчета..."):
+        with st.spinner("Выполняется поиск в ArXiv, семантическая фильтрация через Semantic Gate и генерация отчета..."):
             try:
-                # Импортируем логику из вашего существующего ядра агента (agent_core.py)
-                # Если ваш агент запускается через конкретную функцию, например run_agent(query), вызываем её здесь:
-                # from agent_core import run_agent
-                # report = run_agent(query)
+                # Запускаем асинхронный метод run_audit из нашего ядра
+                report = asyncio.run(agent.run_audit(query))
                 
-                # Временная демонстрация успешного выполнения пайплайна:
-                st.success("Анализ успешно завершен!")
+                st.success("Исследование успешно завершено!")
                 st.markdown("---")
-                st.markdown("### 📊 Итоговый инженерный отчет")
-                st.info(f"Обработан запрос: **{query}**")
-                st.write("Здесь отображаются результаты работы пайплайна, найденные статьи с ArXiv и структурированные рекомендации.")
+                
+                # Выводим реальный сгенерированный отчет агента
+                st.markdown(report)
                 
             except Exception as e:
                 st.error(f"Произошла ошибка при выполнении пайплайна: {e}")
