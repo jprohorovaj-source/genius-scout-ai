@@ -19,14 +19,14 @@ class ResearchPaper:
 class ContextDisambiguator:
     def __init__(self):
         logger.info("ContextDisambiguator успешно инициализирован.")
-    
+
     def enrich_query(self, user_query: str) -> str:
         """
-        Переводит запрос на английский (если нужно) и добавляет строгие 
-        ML/Data Science квалификаторы для исключения биологии и смежных областей.
+        Переводит запрос на английский (если нужно) и формирует
+        поисковый запрос для ArXiv с учетом длины ключевых слов.
         """
         query_lower = user_query.lower().strip()
-        
+
         if any(ch in 'абвгдежзийклмнопрстуфхцчшщъыьэюя' for ch in query_lower):
             try:
                 translated = GoogleTranslator(source='ru', target='en').translate(user_query)
@@ -38,10 +38,13 @@ class ContextDisambiguator:
         else:
             query_en = user_query
 
-        # Строгий ML-контекст для фильтрации мусора
-        ml_strict_keywords = "(machine learning OR deep learning OR neural networks OR algorithm OR artificial intelligence)"
-        
-        enriched = f"({query_en}) AND {ml_strict_keywords}"
+        # Если запрос короткий (например, "Gemini", "Llama", "FAISS"), ищем напрямую без жестких ограничений
+        if len(query_en.split()) <= 2:
+            enriched = query_en
+        else:
+            ml_strict_keywords = "(machine learning OR deep learning OR neural networks OR algorithm)"
+            enriched = f"({query_en}) AND {ml_strict_keywords}"
+
         logger.info(f"Итоговый обогащенный поисковый запрос для ArXiv: '{enriched}'")
         return enriched
 
@@ -54,10 +57,10 @@ class ArxivCollector:
 
     async def fetch_papers(self, query: str) -> List[ResearchPaper]:
         """
-        Собирает статьи с ArXiv с жесткой фильтрацией нерелевантных доменов.
+        Собирает статьи с ArXiv с фильтрацией нерелевантных доменов.
         """
         refined_query = self.disambiguator.enrich_query(query)
-        
+
         # Стоп-слова для проверки на уровне метаданных (биология, медицина)
         forbidden_terms = ['gene', 'protein', 'patient', 'clinical', 'cell', 'biol', 'disease', 'tumor', 'rna', 'dna']
 
@@ -74,7 +77,7 @@ class ArxivCollector:
             for result in client.results(search):
                 title_lower = result.title.lower()
                 summary_lower = result.summary.lower()
-                
+
                 is_forbidden = any(term in title_lower or term in summary_lower for term in forbidden_terms)
                 if is_forbidden:
                     logger.info(f"Отфильтрована нерелевантная (биологическая/медицинская) статья: {result.title}")
@@ -89,10 +92,10 @@ class ArxivCollector:
                     pdf_url=result.pdf_url
                 )
                 papers.append(paper)
-                
+
                 if len(papers) >= self.max_results:
                     break
-                    
+
             logger.info(f"Собрано релевантных ML-статей: {len(papers)}")
             return papers
 
@@ -100,4 +103,5 @@ class ArxivCollector:
             logger.error(f"Ошибка при запросе к ArXiv API: {e}")
             return []
 
-print("✅ collector.py успешно обновлен с поддержкой ResearchPaper.")
+
+print("✅ collector.py успешно обновлен.")
