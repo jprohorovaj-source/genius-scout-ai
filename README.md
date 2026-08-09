@@ -3,9 +3,8 @@ title: GeniusScout AI
 emoji: 🔬
 colorFrom: blue
 colorTo: indigo
-sdk: gradio
-sdk_version: 4.0.0
-app_file: app.py
+sdk: streamlit
+app_file: streamlit_app.py
 pinned: false
 ---
 
