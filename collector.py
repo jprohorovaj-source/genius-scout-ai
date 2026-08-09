@@ -1,6 +1,17 @@
 import arxiv
 from loguru import logger
 
+class ResearchPaper:
+    """Контейнер данных для научной публикации из ArXiv."""
+    def __init__(self, title, summary, authors, published_date, pdf_url, entry_id):
+        self.title = title
+        self.summary = summary
+        self.authors = authors
+        self.published_date = published_date
+        self.pdf_url = pdf_url
+        self.entry_id = entry_id
+
+
 class ArxivCollector:
     def __init__(self, max_results: int = 5):
         self.max_results = max_results
@@ -43,20 +54,16 @@ class ArxivCollector:
             )
             
             papers = []
-            # Клиент arxiv синхронный, оборачиваем результаты в список
             for result in client.results(search):
-                # Создаем объект-контейнер (или класс), чьи атрибуты 
-                # ожидает agent_core.py (title, summary, authors, published_date, pdf_url)
-                class Paper:
-                    def __init__(self, res):
-                        self.title = res.title
-                        self.summary = res.summary
-                        self.authors = [author.name for author in res.authors]
-                        self.published_date = res.published.strftime("%Y-%m-%d")
-                        self.pdf_url = res.pdf_url
-                        self.entry_id = res.entry_id
-
-                papers.append(Paper(result))
+                paper = ResearchPaper(
+                    title=result.title,
+                    summary=result.summary,
+                    authors=[author.name for author in result.authors],
+                    published_date=result.published.strftime("%Y-%m-%d"),
+                    pdf_url=result.pdf_url,
+                    entry_id=result.entry_id
+                )
+                papers.append(paper)
                 
             logger.info(f"Успешно найдено статей: {len(papers)}")
             return papers
