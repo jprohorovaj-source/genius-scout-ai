@@ -1,3 +1,14 @@
+---
+title: GeniusScout AI
+emoji: 🔬
+colorFrom: blue
+colorTo: indigo
+sdk: gradio
+sdk_version: 4.0.0
+app_file: app.py
+pinned: false
+---
+
 #  GeniusScout AI v10.5
 ## Автономная AI-система поиска, семантического анализа и компиляции научных знаний
 
