@@ -50,59 +50,59 @@ pinned: false
 
 ---
 
-#  Архитектура системы
+# Архитектура системы
 
 ```text
-                    Пользователь
+                    Пользователь
 
-                          │
+                         │
 
-                          ▼
+                         ▼
 
-              Context Disambiguator
+              Context Disambiguator
 
-                          │
+                         │
 
-                          ▼
+                         ▼
 
-                 Academic Query Builder
+             Academic Query Builder
 
-                          │
+                         │
 
-                          ▼
+                         ▼
 
-                    ArXiv Collector
+                    ArXiv Collector
 
-                          │
+                         │
 
-                          ▼
+                         ▼
 
-                 Semantic Gate
-          (CrossEncoder Re-Ranking)
+         Embedding Generator (E5 Large)
 
-                          │
+                         │
 
-                          ▼
+                         ▼
 
-           Embedding Generator (E5 Large)
+                 FAISS Vector Database
 
-                          │
+                         │
 
-                          ▼
+                         ▼
 
-               FAISS Vector Database
+                    Semantic Gate
+             (CrossEncoder Re-Ranking)
 
-                          │
+                         │
 
-                          ▼
+                         ▼
 
-              Engineering Report Builder
+            Engineering Report Builder
 
-                          │
+                         │
 
-                          ▼
+                         ▼
 
-                  Gradio Web Interface
+                  Gradio Web Interface
 ```
 
 ---
