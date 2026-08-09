@@ -33,7 +33,7 @@ def collect_papers(query: str, max_results: int = 3):
     # Применяем защитный механизм от нерелевантных тематик (геология, физика и т.д.)
     processed_query = enhance_query_for_programming(query)
     
-    logger.info(библиотеке `arxiv` отправляется запрос: {processed_query})
+    logger.info(f"В библиотеке `arxiv` отправляется запрос: {processed_query}")
     
     try:
         # Настройка клиента ArXiv
